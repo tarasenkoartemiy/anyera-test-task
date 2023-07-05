@@ -21,8 +21,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('djoser.urls')),  # для регистрации
-    path('auth/', include('djoser.urls.jwt')),  # для авторизации
+    path('auth/', include('djoser.urls')),  # registration
+    path('auth/', include('djoser.urls.jwt')),  # authentication
     path('api/v1/', include('api.urls'))
 ]
 

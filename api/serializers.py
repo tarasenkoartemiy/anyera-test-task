@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Pet
 
 
-class UserSerializer(serializers.ModelSerializer):
+class OwnerSerializer(serializers.ModelSerializer):
     pets = serializers.SlugRelatedField(many=True, read_only=True, slug_field='nickname')
 
     class Meta:
@@ -17,4 +17,3 @@ class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = '__all__'
-
