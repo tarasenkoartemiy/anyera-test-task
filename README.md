@@ -13,11 +13,8 @@
 ```no-highlight
 git clone https://github.com/tarasenkoartemiy/anyera-test-task.git
 ```
-4. Перейти в папку каталога:
-```no-highlight
-cd anyera-test-task
-```
-5. Запустить сервисы:
+4. В /anyera-test-task/config создать файл `.env` и заполнить, используя `.env.template`
+5. Из корневой папки проекта запустить сервисы:
 ```no-highlight
 sudo docker compose up
 ```
