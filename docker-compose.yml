@@ -3,15 +3,15 @@ services:
   anyera:
     build:
       context: .
-    ports:
-      - "8000:8000"
     volumes:
-      - anyera:/anyera
+      - static_volume:/anyera/static
+      - media_volume:/anyera/media
     env_file:
       - config/.env
     command: >
-      sh -c "python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000 --noreload"
+      sh -c "python manage.py collectstatic --noinput &&
+                   python manage.py migrate &&
+                   python manage.py runserver 0.0.0.0:8000 --noreload"
     depends_on:
       database:
         condition: service_healthy
@@ -28,7 +28,17 @@ services:
       interval: 10s
       timeout: 5s
     restart: unless-stopped
+  nginx:
+      build:
+        context: ./nginx
+      volumes:
+        - static_volume:/anyera/static
+        - media_volume:/anyera/media
+      depends_on:
+        - anyera
+      ports:
+        - "8000:80"
 volumes:
-  anyera:
+  static_volume:
+  media_volume:
   postgres-data:
-
